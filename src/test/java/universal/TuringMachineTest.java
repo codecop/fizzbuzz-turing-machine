@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import universal.state.State;
+import universal.state.TransitionRules;
+import universal.state.TransitionTable;
 import universal.tape.Direction;
 import universal.tape.Symbol;
 import universal.tape.Tape;

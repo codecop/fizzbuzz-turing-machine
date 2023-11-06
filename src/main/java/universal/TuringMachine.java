@@ -1,5 +1,8 @@
 package universal;
 
+import universal.state.State;
+import universal.state.Transition;
+import universal.state.TransitionRules;
 import universal.tape.Direction;
 import universal.tape.Symbol;
 import universal.tape.Tape;

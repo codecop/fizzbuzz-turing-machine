@@ -1,4 +1,4 @@
-package universal;
+package universal.state;
 
 public interface State {
     

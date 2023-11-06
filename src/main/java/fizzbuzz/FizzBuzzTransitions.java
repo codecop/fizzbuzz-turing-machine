@@ -1,9 +1,9 @@
 package fizzbuzz;
 
-import universal.State;
-import universal.TransitionRules;
-import universal.TransitionTableRules;
-import universal.TransitionTable;
+import universal.state.State;
+import universal.state.TransitionRules;
+import universal.state.TransitionTable;
+import universal.state.TransitionTableRules;
 
 public class FizzBuzzTransitions {
 

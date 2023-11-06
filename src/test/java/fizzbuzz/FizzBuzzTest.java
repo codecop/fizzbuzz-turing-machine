@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import universal.TransitionRules;
 import universal.TuringMachine;
+import universal.state.TransitionRules;
 import universal.tape.Tape;
 
 /*

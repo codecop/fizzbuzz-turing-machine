@@ -1,17 +1,18 @@
-package universal;
+package universal.state;
 
 import universal.tape.Direction;
 import universal.tape.Symbol;
 
-class Transition {
+public class Transition {
 
-    final State nextState;
-    final Symbol symbolToWrite;
-    final Direction directionToMove;
+    public final State nextState;
+    public final Symbol symbolToWrite;
+    public final Direction directionToMove;
 
     Transition(State nextState, Symbol symbolToWrite, Direction directionToMove) {
         this.nextState = nextState;
         this.symbolToWrite = symbolToWrite;
         this.directionToMove = directionToMove;
     }
+
 }
