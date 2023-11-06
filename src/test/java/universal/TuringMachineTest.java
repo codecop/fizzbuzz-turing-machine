@@ -1,4 +1,4 @@
-package fizzbuzz;
+package universal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,16 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
-import fizzbuzz.Direction;
-import fizzbuzz.State;
-import fizzbuzz.Symbol;
-import fizzbuzz.Tape;
-import fizzbuzz.Transition;
-import fizzbuzz.TransitionRules;
-import fizzbuzz.TransitionRulesChain;
-import fizzbuzz.TransitionTable;
-import fizzbuzz.TuringMachine;
 
 class TuringMachineTest {
 
@@ -86,13 +76,13 @@ class TuringMachineTest {
         List<Alphabet> _011010 = Arrays.asList(Alphabet.Zero, Alphabet.One, Alphabet.One, //
                 Alphabet.Zero, Alphabet.One, Alphabet.Zero, Alphabet.Blank);
         Tape<Alphabet> tape = new Tape<>(_011010);
-        
+
         TransitionRules transitionRules = new TransitionTable(). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.One, null, null, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.Blank, Q.Halt, null, null). //
                 toRules();
-        
+
         TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitionRules, initial);
 
         machine.loop();

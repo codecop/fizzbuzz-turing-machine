@@ -1,5 +1,10 @@
 package fizzbuzz;
 
+import universal.State;
+import universal.TransitionRules;
+import universal.TransitionRulesChain;
+import universal.TransitionTable;
+
 public class FizzBuzzTransitions {
 
     public TransitionRules create() {

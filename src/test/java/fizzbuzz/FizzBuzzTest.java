@@ -8,12 +8,9 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import fizzbuzz.CharSymbol;
-import fizzbuzz.FizzBuzzTransitions;
-import fizzbuzz.Q;
-import fizzbuzz.Tape;
-import fizzbuzz.TransitionRules;
-import fizzbuzz.TuringMachine;
+import universal.Tape;
+import universal.TransitionRules;
+import universal.TuringMachine;
 
 /*
  * How would FizzBuzz be on the Tape = kind of stack?

@@ -1,14 +1,10 @@
-package fizzbuzz;
+package universal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-import fizzbuzz.Direction;
-import fizzbuzz.Symbol;
-import fizzbuzz.Tape;
 
 class TapeTest {
 

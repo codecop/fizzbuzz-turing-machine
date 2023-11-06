@@ -1,10 +1,8 @@
-package fizzbuzz;
+package universal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import fizzbuzz.Direction;
 
 class DirectionTest {
 

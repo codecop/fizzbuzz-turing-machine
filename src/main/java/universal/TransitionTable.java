@@ -1,4 +1,4 @@
-package fizzbuzz;
+package universal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,46 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface TransitionRules {
-    Transition next(State state, Symbol symbol);
-}
-
-/**
- * Split complex transitions into groups as Chain of Responsibility.
- */
-abstract class TransitionRulesChain implements TransitionRules {
-
-    private TransitionRulesChain nextChain;
-
-    public TransitionRulesChain add(TransitionRulesChain chain) {
-        if (this.nextChain == null) {
-            this.nextChain = chain;
-        } else {
-            this.nextChain.add(chain);
-        }
-        return this;
-    }
-
-    @Override
-    public Transition next(State state, Symbol symbol) {
-        Transition transition = nextOrNull(state, symbol);
-        if (transition != null) {
-            return transition;
-        }
-        if (nextChain != null) {
-            return nextChain.next(state, symbol);
-        }
-        throw new IllegalArgumentException("State " + state + " ; Symbol " + symbol);
-    }
-
-    protected abstract Transition nextOrNull(State state, Symbol symbol);
-
-}
-
 /**
  * Factory for TransitionRules using table rows.
  */
-class TransitionTable {
+public class TransitionTable {
 
     private final Function<String, Symbol> converter;
     private final List<TransitionRow> rows = new ArrayList<>();
