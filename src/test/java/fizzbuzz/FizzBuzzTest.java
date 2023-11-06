@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import universal.TuringMachine;
-import universal.state.TransitionRules;
+import universal.state.TransitionLookup;
 import universal.tape.Tape;
 
 /*
@@ -156,7 +156,7 @@ class FizzBuzzTest {
         }
     }
 
-    private void createMachineWith(String initialTape, Q initial, TransitionRules transitionRules) {
+    private void createMachineWith(String initialTape, Q initial, TransitionLookup transitionRules) {
         tape = new Tape<>(CharSymbol.fromString(initialTape), CharSymbol.EMPTY);
         machine = new TuringMachine<>(tape, transitionRules, initial);
     }

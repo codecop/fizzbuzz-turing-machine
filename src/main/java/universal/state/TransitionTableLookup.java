@@ -6,11 +6,11 @@ import java.util.Optional;
 
 import universal.tape.Symbol;
 
-public class TransitionTableRules implements TransitionRules {
+public class TransitionTableLookup implements TransitionLookup {
 
     private final List<TransitionTableRow> rows;
 
-    public TransitionTableRules(List<TransitionTableRow> rows) {
+    public TransitionTableLookup(List<TransitionTableRow> rows) {
         this.rows = rows;
     }
 
@@ -23,11 +23,11 @@ public class TransitionTableRules implements TransitionRules {
                 .orElse(null);
     }
 
-    public TransitionTableRules add(TransitionTableRules next) {
+    public TransitionTableLookup add(TransitionTableLookup next) {
         List<TransitionTableRow> allRows = new ArrayList<>();
         allRows.addAll(this.rows);
         allRows.addAll(next.rows);
-        return new TransitionTableRules(allRows);
+        return new TransitionTableLookup(allRows);
     }
 
 }

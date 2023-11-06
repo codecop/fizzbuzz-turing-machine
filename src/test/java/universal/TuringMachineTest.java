@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import universal.state.State;
-import universal.state.TransitionRules;
+import universal.state.TransitionLookup;
 import universal.state.TransitionTable;
 import universal.tape.Direction;
 import universal.tape.Symbol;
@@ -44,13 +44,13 @@ class TuringMachineTest {
                 Alphabet.Zero, Alphabet.One, Alphabet.Zero, Alphabet.Blank);
         Tape<Alphabet> tape = new Tape<>(_011010, null);
 
-        TransitionRules transitionRules = new TransitionTable(). //
+        TransitionLookup transitionLookup = new TransitionTable(). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.One, null, null, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.Blank, Q.Halt, null, null). //
                 toRules();
 
-        TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitionRules, initial);
+        TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitionLookup, initial);
 
         machine.loop();
 

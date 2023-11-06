@@ -46,7 +46,7 @@ public class TransitionTable {
         return this;
     }
 
-    public TransitionTableRules toRules() {
-        return new TransitionTableRules(Collections.unmodifiableList(rows));
+    public TransitionTableLookup toRules() {
+        return new TransitionTableLookup(Collections.unmodifiableList(rows));
     }
 }

@@ -2,7 +2,7 @@ package universal.state;
 
 import universal.tape.Symbol;
 
-public interface TransitionRules {
+public interface TransitionLookup {
 
     Transition next(State state, Symbol symbol);
 }

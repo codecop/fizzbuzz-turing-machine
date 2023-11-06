@@ -2,7 +2,7 @@ package universal;
 
 import universal.state.State;
 import universal.state.Transition;
-import universal.state.TransitionRules;
+import universal.state.TransitionLookup;
 import universal.tape.Direction;
 import universal.tape.Symbol;
 import universal.tape.Tape;
@@ -15,14 +15,14 @@ import universal.tape.Tape;
 public class TuringMachine<SYM extends Symbol> {
 
     private final Tape<SYM> tape;
-    private final TransitionRules transitionRules;
+    private final TransitionLookup transitionLookup;
     private State state;
 
     private boolean debug = false;
 
-    public TuringMachine(Tape<SYM> tape, TransitionRules transitionRules, State initialState) {
+    public TuringMachine(Tape<SYM> tape, TransitionLookup transitionLookup, State initialState) {
         this.tape = tape;
-        this.transitionRules = transitionRules;
+        this.transitionLookup = transitionLookup;
         this.state = initialState;
     }
 
@@ -44,7 +44,7 @@ public class TuringMachine<SYM extends Symbol> {
         if (debug) {
             System.out.println(tape + "\tState: '" + state + "' \t Symbol: '" + symbol + "'");
         }
-        Transition transition = transitionRules.next(state, symbol);
+        Transition transition = transitionLookup.next(state, symbol);
 
         // Change State: The TM can change its internal state based on the current state it is in 
         // and the symbol it reads from the tape.
