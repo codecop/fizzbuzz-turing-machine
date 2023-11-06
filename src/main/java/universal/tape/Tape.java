@@ -1,4 +1,4 @@
-package universal;
+package universal.tape;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,18 +27,18 @@ public class Tape<SYM extends Symbol> {
         this.defaultValue = defaultValue;
     }
 
-    SYM read() {
+    public SYM read() {
         return cells.getOrDefault(head, defaultValue);
     }
 
-    void write(SYM symbol) {
+    public void write(SYM symbol) {
         cells.put(head, symbol);
     }
 
     /**
      * Keep track of the position of the read/write head on the tape.
      */
-    void moveHead(Direction direction) {
+    public void moveHead(Direction direction) {
         switch (direction) {
         case LEFT:
             head--;

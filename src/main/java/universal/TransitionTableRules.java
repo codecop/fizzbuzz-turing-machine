@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import universal.tape.Symbol;
+
 public class TransitionTableRules implements TransitionRules {
 
     private final List<TransitionRow> rows;

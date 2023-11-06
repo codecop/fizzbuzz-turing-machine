@@ -7,6 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import universal.tape.Direction;
+import universal.tape.Symbol;
+import universal.tape.Tape;
+
 class TuringMachineTest {
 
     enum Alphabet implements Symbol {
@@ -35,7 +39,7 @@ class TuringMachineTest {
         Q initial = Q.Zero;
         List<Alphabet> _011010 = Arrays.asList(Alphabet.Zero, Alphabet.One, Alphabet.One, //
                 Alphabet.Zero, Alphabet.One, Alphabet.Zero, Alphabet.Blank);
-        Tape<Alphabet> tape = new Tape<>(_011010);
+        Tape<Alphabet> tape = new Tape<>(_011010, null);
 
         TransitionRules transitionRules = new TransitionTable(). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //

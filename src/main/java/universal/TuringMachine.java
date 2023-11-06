@@ -1,5 +1,9 @@
 package universal;
 
+import universal.tape.Direction;
+import universal.tape.Symbol;
+import universal.tape.Tape;
+
 /**
  * A Universal Turing Machine (UTM). The Universal Turing Machine can simulate the behaviour of any
  * Turing machine. It takes the description of any arbitrary Turing machine as input and mimic its

@@ -3,7 +3,7 @@ package fizzbuzz;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import universal.Symbol;
+import universal.tape.Symbol;
 
 /**
  * Known Symbols: "P<code>hC<bit number>$<bit number>$"

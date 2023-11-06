@@ -1,12 +1,12 @@
-package universal;
+package universal.tape;
 
 /**
  * Direction to move the head on the tape.
  */
-enum Direction {
+public enum Direction {
     LEFT, NONE, RIGHT;
 
-    static Direction fromString(String direction) {
+    public static Direction fromString(String direction) {
         if (direction == null) {
             return NONE;
         }

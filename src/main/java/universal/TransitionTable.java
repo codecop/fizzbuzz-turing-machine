@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import universal.tape.Direction;
+import universal.tape.Symbol;
+
 /**
  * Factory for TransitionRules using table rows.
  */

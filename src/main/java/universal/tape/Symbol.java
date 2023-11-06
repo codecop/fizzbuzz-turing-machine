@@ -1,4 +1,4 @@
-package universal;
+package universal.tape;
 
 /**
  * A symbol on the tape.

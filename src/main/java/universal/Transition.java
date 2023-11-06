@@ -1,5 +1,8 @@
 package universal;
 
+import universal.tape.Direction;
+import universal.tape.Symbol;
+
 class Transition {
 
     final State nextState;
