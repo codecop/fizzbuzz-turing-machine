@@ -59,7 +59,7 @@ class TransitionRow {
     private final Symbol newSymbol;
     private final Direction direction;
 
-    public TransitionRow(State state, Symbol symbol, State newState, Symbol newSymbol, Direction direction) {
+    TransitionRow(State state, Symbol symbol, State newState, Symbol newSymbol, Direction direction) {
         this.state = state;
         this.symbol = symbol;
         this.newState = newState;
@@ -67,27 +67,15 @@ class TransitionRow {
         this.direction = direction;
     }
 
-    public boolean applies(State currentState, Symbol currentSymbol) {
+    boolean applies(State currentState, Symbol currentSymbol) {
         return (state == anyState || state.equals(currentState)) && //
                 (symbol == anySymbol || symbol.equals(currentSymbol));
     }
 
-    public Transition getTransition(State currentState, Symbol currentSymbol) {
+    Transition getTransition(State currentState, Symbol currentSymbol) {
         return new Transition(//
                 newState != anyState ? newState : currentState, //
                 newSymbol != anySymbol ? newSymbol : currentSymbol, //
                 direction != null ? direction : Direction.NONE);
-    }
-}
-
-class Transition {
-    final State nextState;
-    final Symbol symbolToWrite;
-    final Direction directionToMove;
-
-    public Transition(State nextState, Symbol symbolToWrite, Direction directionToMove) {
-        this.nextState = nextState;
-        this.symbolToWrite = symbolToWrite;
-        this.directionToMove = directionToMove;
     }
 }
