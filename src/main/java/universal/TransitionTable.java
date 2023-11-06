@@ -3,7 +3,6 @@ package universal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -44,7 +43,7 @@ public class TransitionTable {
         return this;
     }
 
-    public TransitionRulesChain toRules() {
+    public TransitionTableRules toRules() {
         return new TransitionTableRules(Collections.unmodifiableList(rows));
     }
 }
@@ -91,23 +90,4 @@ class Transition {
         this.symbolToWrite = symbolToWrite;
         this.directionToMove = directionToMove;
     }
-}
-
-class TransitionTableRules extends TransitionRulesChain {
-
-    private final List<TransitionRow> rows;
-
-    public TransitionTableRules(List<TransitionRow> rows) {
-        this.rows = rows;
-    }
-
-    @Override
-    protected Transition nextOrNull(State state, Symbol symbol) {
-        Optional<TransitionRow> row = rows.stream().//
-                filter(r -> r.applies(state, symbol)). //
-                findFirst();
-        return row.map(r -> r.getTransition(state, symbol)) //
-                .orElse(null);
-    }
-
 }

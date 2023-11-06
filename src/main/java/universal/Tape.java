@@ -15,10 +15,6 @@ public class Tape<SYM extends Symbol> {
     // Define the head position.
     private int head = 0;
 
-    Tape() {
-        this(Collections.emptyList(), null);
-    }
-
     Tape(List<SYM> input) {
         this(input, null);
     }

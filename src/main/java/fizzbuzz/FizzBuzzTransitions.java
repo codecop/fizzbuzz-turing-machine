@@ -2,7 +2,7 @@ package fizzbuzz;
 
 import universal.State;
 import universal.TransitionRules;
-import universal.TransitionRulesChain;
+import universal.TransitionTableRules;
 import universal.TransitionTable;
 
 public class FizzBuzzTransitions {
@@ -11,7 +11,7 @@ public class FizzBuzzTransitions {
         return code().add(less()).add(equal()).add(inc()).add(duplicate());
     }
 
-    public TransitionRulesChain code() {
+    public TransitionTableRules code() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Ip_Restart, "P", Q.Ip_SwitchRight, null, "R") // 
 
@@ -137,7 +137,7 @@ public class FizzBuzzTransitions {
     /**
      * Less starts on left first (highest) digit of left argument and stops on the end of the first $.
      */
-    public TransitionRulesChain less() {
+    public TransitionTableRules less() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Less, "0", Q.Less_MoveRight7And0, null, "R")
                 .row(Q.Less_MoveRight7And0, null, Q.Less_MoveRight6And0, null, "R")
@@ -179,7 +179,7 @@ public class FizzBuzzTransitions {
     /**
      * Equal starts on left first digit of left argument and stops on the end of the first $.
      */
-    public TransitionRulesChain equal() {
+    public TransitionTableRules equal() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Equal, "0", Q.Equal_MoveRight7And0, null, "R")
                 .row(Q.Equal_MoveRight7And0, null, Q.Equal_MoveRight6And0, null, "R")
@@ -221,7 +221,7 @@ public class FizzBuzzTransitions {
      * Inc starts on left first digit of argument and stops on the inc'ed $. <br />
      * The last digit must not overflow.
      */
-    public TransitionRulesChain inc() {
+    public TransitionTableRules inc() {
         return new TransitionTable(CharSymbol::new) //
                 // 1. go to right $, then work backwards
                 .row(Q.Inc, null, Q.Inc_MoveRightAndInc, null, "R")
@@ -244,7 +244,7 @@ public class FizzBuzzTransitions {
     /**
      * Duplicate starts on left first digit of argument and stops on the duplicated $.
      */
-    public TransitionRulesChain duplicate() {
+    public TransitionTableRules duplicate() {
         return new TransitionTable(CharSymbol::new) //
                 // duplicate the 0 eight to the right
                 .row(Q.Dup, "0", Q.Dup_Move7RightAndWrite0, null, "R") // remember to write 0 and move right, need to move 7+1 right
