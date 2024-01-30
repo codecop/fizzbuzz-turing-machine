@@ -33,8 +33,9 @@ import universal.tape.Tape;
  */
 class FizzBuzzTest {
 
-    StringTransitionTable table = new StringTransitionTable(CharSymbol::new);
     Tape<CharSymbol> tape;
+    FizzBuzzTransitions transitions = new FizzBuzzTransitions();
+    StringTransitionTable table = new StringTransitionTable(CharSymbol::new);
     TuringMachine<CharSymbol> machine;
 
     @Nested
@@ -42,7 +43,7 @@ class FizzBuzzTest {
 
         @Test
         void duplicate() {
-            new FizzBuzzTransitions().addDuplicate(table);
+            transitions.addDuplicate(table);
             createMachineWith("0000000$", Q.Dup, table);
             machine.loop();
             assertTapeEquals("0000000$0000000$");
@@ -50,7 +51,7 @@ class FizzBuzzTest {
 
         @Test
         void incZero() {
-            new FizzBuzzTransitions().addInc(table);
+            transitions.addInc(table);
             createMachineWith("0000000$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000001$");
@@ -58,7 +59,7 @@ class FizzBuzzTest {
 
         @Test
         void incOne() {
-            new FizzBuzzTransitions().addInc(table);
+            transitions.addInc(table);
             createMachineWith("0000001$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000010$");
@@ -66,7 +67,7 @@ class FizzBuzzTest {
 
         @Test
         void incToMax() {
-            new FizzBuzzTransitions().addInc(table);
+            transitions.addInc(table);
             createMachineWith("0111111$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("1000000$");
@@ -74,7 +75,7 @@ class FizzBuzzTest {
 
         @Test
         void equal() {
-            new FizzBuzzTransitions().addEqual(table);
+            transitions.addEqual(table);
             createMachineWith("0101101$0101101$", Q.Equal, table);
             machine.loop();
             assertTapeEquals("0101101C0101101$");
@@ -87,63 +88,63 @@ class FizzBuzzTest {
 
         @Test
         void halt() {
-            createMachineWith("Ph", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("Ph", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("hP");
         }
 
         @Test
         void inc() {
-            createMachineWith("PihC0101010$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("PihC0101010$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("ihP$0101011C");
         }
 
         @Test
         void dupWithCursorMovement() {
-            createMachineWith("PdllrhC0101010$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("PdllrhC0101010$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("dllrhP$0101010C0101010$");
         }
 
         @Test
         void equalThenMultipleStatements() {
-            createMachineWith("P=ilili;hC0000000$0000000$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("P=ilili;hC0000000$0000000$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("=ilili;hP$0000000$0000011C");
         }
 
         @Test
         void notEqual() {
-            createMachineWith("P=i;hC0101101$0101001$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("P=i;hC0101101$0101001$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("=i;hP$0101101C0101001$");
         }
 
         @Test
         void lessFalseOnSameInput() {
-            createMachineWith("P<i;hC0101101$0101101$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("P<i;hC0101101$0101101$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("<i;hP$0101101C0101101$");
         }
 
         @Test
         void lessSuccessOnOneLargerInput() {
-            createMachineWith("P<i;hC0101101$0101110$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("P<i;hC0101101$0101110$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("<i;hP$0101101$0101111C");
         }
 
         @Test
         void gotoLabel() {
-            createMachineWith("PLil=lg;hC0000000$0000001$", Q.Ip_Restart, new FizzBuzzTransitions().create());
+            createMachineWith("PLil=lg;hC0000000$0000001$", Q.Ip_Restart, transitions.create());
             machine.loop();
             assertTapeEquals("Lil=lg;hP$0000010C0000001$");
         }
     }
 
     @Nested
-    class Code {
+    class FizzBuzzCode {
 
         @Test
         void createNumbersOneTo16() {
@@ -157,7 +158,7 @@ class FizzBuzzTest {
                     // "rrrrBrrrrBrrrrBr" + //
                     // "llllllllllllllll" + // 
                     "hC0000001$0001111$", // from - to starting data = 1 (limit-1).toBinary
-                    Q.Ip_Restart, new FizzBuzzTransitions().create());
+                    Q.Ip_Restart, transitions.create());
             machine.loop();
             assertHumanTapeEquals("C1$2$3$4$5$6$7$8$9$10$11$12$13$14$15$16$");
         }
