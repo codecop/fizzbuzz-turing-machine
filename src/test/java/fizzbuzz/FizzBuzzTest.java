@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import universal.TuringMachine;
+import universal.state.StringTransitionTable;
 import universal.state.TransitionLookup;
-import universal.state.TransitionTable;
 import universal.tape.Tape;
 
 /*
@@ -33,7 +33,7 @@ import universal.tape.Tape;
  */
 class FizzBuzzTest {
 
-    TransitionTable table = new TransitionTable(CharSymbol::new);
+    StringTransitionTable table = new StringTransitionTable(CharSymbol::new);
     Tape<CharSymbol> tape;
     TuringMachine<CharSymbol> machine;
 

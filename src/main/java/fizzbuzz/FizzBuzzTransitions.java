@@ -1,12 +1,13 @@
 package fizzbuzz;
 
 import universal.state.State;
+import universal.state.StringTransitionTable;
 import universal.state.TransitionTable;
 
 public class FizzBuzzTransitions {
 
     public TransitionTable create() {
-        TransitionTable table = new TransitionTable(CharSymbol::new);
+        StringTransitionTable table = new StringTransitionTable(CharSymbol::new);
         code(table);
         less(table);
         equal(table);
@@ -15,7 +16,7 @@ public class FizzBuzzTransitions {
         return table;
     }
 
-    void code(TransitionTable table) {
+    void code(StringTransitionTable table) {
         table //
                 .row(Q.Ip_Restart, "P", Q.Ip_SwitchRight, null, "R") // 
 
@@ -138,7 +139,7 @@ public class FizzBuzzTransitions {
     /**
      * Less starts on left first (highest) digit of left argument and stops on the end of the first $.
      */
-    void less(TransitionTable table) {
+    void less(StringTransitionTable table) {
         table //
                 .row(Q.Less, "0", Q.Less_MoveRight7And0, null, "R")
                 .row(Q.Less_MoveRight7And0, null, Q.Less_MoveRight6And0, null, "R")
@@ -179,7 +180,7 @@ public class FizzBuzzTransitions {
     /**
      * Equal starts on left first digit of left argument and stops on the end of the first $.
      */
-    void equal(TransitionTable table) {
+    void equal(StringTransitionTable table) {
         table //
                 .row(Q.Equal, "0", Q.Equal_MoveRight7And0, null, "R")
                 .row(Q.Equal_MoveRight7And0, null, Q.Equal_MoveRight6And0, null, "R")
@@ -218,7 +219,7 @@ public class FizzBuzzTransitions {
      * Inc starts on left first digit of argument and stops on the inc'ed $. <br />
      * The last digit must not overflow.
      */
-    void inc(TransitionTable table) {
+    void inc(StringTransitionTable table) {
         table //
                 // 1. go to right $, then work backwards
                 .row(Q.Inc, null, Q.Inc_MoveRightAndInc, null, "R")
@@ -240,7 +241,7 @@ public class FizzBuzzTransitions {
     /**
      * Duplicate starts on left first digit of argument and stops on the duplicated $.
      */
-    void duplicate(TransitionTable table) {
+    void duplicate(StringTransitionTable table) {
         table //
                 // duplicate the 0 eight to the right
                 .row(Q.Dup, "0", Q.Dup_Move7RightAndWrite0, null, "R") // remember to write 0 and move right, need to move 7+1 right

@@ -44,7 +44,7 @@ class TuringMachineTest {
                 Alphabet.Zero, Alphabet.One, Alphabet.Zero, Alphabet.Blank);
         Tape<Alphabet> tape = new Tape<>(_011010, Alphabet.Blank);
 
-        TransitionLookup transitionLookup = new TransitionTable(null). //
+        TransitionLookup transitionLookup = new TransitionTable(). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.One, null, null, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.Blank, Q.Halt, null, null); 
