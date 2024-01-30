@@ -31,6 +31,6 @@ class TransitionTableRow {
         return new Transition(//
                 newState != anyState ? newState : currentState, //
                 newSymbol != anySymbol ? newSymbol : currentSymbol, //
-                direction != null ? direction : Direction.NONE);
+                direction);
     }
 }

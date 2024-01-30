@@ -47,7 +47,7 @@ class TuringMachineTest {
         TransitionLookup transitionLookup = new TransitionTable(). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.One, null, null, Direction.RIGHT). //
-                row(Q.Zero, Alphabet.Blank, Q.Halt, null, null); 
+                row(Q.Zero, Alphabet.Blank, Q.Halt, null, Direction.NONE); 
 
         TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitionLookup, initial);
 
