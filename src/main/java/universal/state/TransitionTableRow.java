@@ -5,8 +5,8 @@ import universal.tape.Symbol;
 
 class TransitionTableRow {
 
-    private static final State anyState = null;
-    private static final Symbol anySymbol = null;
+    static final State anyState = null;
+    static final Symbol anySymbol = null;
 
     private final State state;
     private final Symbol symbol;
