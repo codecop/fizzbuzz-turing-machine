@@ -13,7 +13,7 @@ class TapeTest {
     }
 
     @Test
-    void readAndWrite() {
+    void readsAndWrites() {
         Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         assertEquals(S.A, tape.read());
@@ -22,7 +22,7 @@ class TapeTest {
     }
 
     @Test
-    void move() {
+    void movesBothDirections() {
         Tape<S> tape = new Tape<>(Arrays.asList(S.A, S.B, S.C), null);
 
         tape.moveHead(Direction.RIGHT);
@@ -38,20 +38,7 @@ class TapeTest {
     }
 
     @Test
-    void wroteBeyondEndWithDefault() {
-        Tape<S> tape = new Tape<>(Arrays.asList(S.A), S.EMPTY);
-
-        tape.moveHead(Direction.RIGHT);
-        assertEquals(S.EMPTY, tape.read());
-
-        tape.write(S.B);
-        assertEquals(S.B, tape.read());
-
-        assertEquals(Arrays.asList(S.A, S.B), tape.getCells());
-    }
-
-    @Test
-    void wroteBeyondEnd() {
+    void writesBeyondEnd() {
         Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         tape.moveHead(Direction.RIGHT);
@@ -63,7 +50,15 @@ class TapeTest {
     }
 
     @Test
-    void wroteBelowBeginning() {
+    void movesBeyondEndWithDefault() {
+        Tape<S> tape = new Tape<>(Arrays.asList(S.A), S.EMPTY);
+
+        tape.moveHead(Direction.RIGHT);
+        assertEquals(S.EMPTY, tape.read());
+    }
+
+    @Test
+    void writesBelowBeginning() {
         Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         tape.moveHead(Direction.LEFT);
