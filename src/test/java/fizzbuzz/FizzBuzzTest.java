@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import universal.TuringMachine;
 import universal.state.TransitionLookup;
+import universal.state.TransitionTable;
 import universal.tape.Tape;
 
 /*
@@ -32,6 +33,7 @@ import universal.tape.Tape;
  */
 class FizzBuzzTest {
 
+    TransitionTable table = new TransitionTable(CharSymbol::new);
     Tape<CharSymbol> tape;
     TuringMachine<CharSymbol> machine;
 
@@ -40,35 +42,40 @@ class FizzBuzzTest {
 
         @Test
         void duplicate() {
-            createMachineWith("0000000$", Q.Dup, new FizzBuzzTransitions().duplicate());
+            new FizzBuzzTransitions().duplicate(table);
+            createMachineWith("0000000$", Q.Dup, table);
             machine.loop();
             assertTapeEquals("0000000$0000000$");
         }
 
         @Test
         void incZero() {
-            createMachineWith("0000000$", Q.Inc, new FizzBuzzTransitions().inc());
+            new FizzBuzzTransitions().inc(table);
+            createMachineWith("0000000$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000001$");
         }
 
         @Test
         void incOne() {
-            createMachineWith("0000001$", Q.Inc, new FizzBuzzTransitions().inc());
+            new FizzBuzzTransitions().inc(table);
+            createMachineWith("0000001$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000010$");
         }
 
         @Test
         void incToMax() {
-            createMachineWith("0111111$", Q.Inc, new FizzBuzzTransitions().inc());
+            new FizzBuzzTransitions().inc(table);
+            createMachineWith("0111111$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("1000000$");
         }
 
         @Test
         void equal() {
-            createMachineWith("0101101$0101101$", Q.Equal, new FizzBuzzTransitions().equal());
+            new FizzBuzzTransitions().equal(table);
+            createMachineWith("0101101$0101101$", Q.Equal, table);
             machine.loop();
             assertTapeEquals("0101101C0101101$");
         }

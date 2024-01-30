@@ -6,11 +6,17 @@ import universal.state.TransitionTable;
 public class FizzBuzzTransitions {
 
     public TransitionTable create() {
-        return code().add(less()).add(equal()).add(inc()).add(duplicate());
+        TransitionTable table = new TransitionTable(CharSymbol::new);
+        code(table);
+        less(table);
+        equal(table);
+        inc(table);
+        duplicate(table);
+        return table;
     }
 
-    public TransitionTable code() {
-        return new TransitionTable(CharSymbol::new) //
+    void code(TransitionTable table) {
+        table //
                 .row(Q.Ip_Restart, "P", Q.Ip_SwitchRight, null, "R") // 
 
                 // restart goes to the left until P
@@ -126,17 +132,14 @@ public class FizzBuzzTransitions {
                 .row(Q.Ip_Goto, ";", Q.Ip_GotoRightEqualEnd, "P", "R") // switch P<>instruction in Goto
                 .row(Q.Ip_GotoRightEqualEnd, "P", Q.Ip_Goto, ";", "L") // switch P<>instruction in Goto
 
-                .row(Q.Ip_Goto, "L", Q.Ip_Restart, null, "R") //
-
-                //
-                ;
+                .row(Q.Ip_Goto, "L", Q.Ip_Restart, null, "R");
     }
 
     /**
      * Less starts on left first (highest) digit of left argument and stops on the end of the first $.
      */
-    public TransitionTable less() {
-        return new TransitionTable(CharSymbol::new) //
+    void less(TransitionTable table) {
+        table //
                 .row(Q.Less, "0", Q.Less_MoveRight7And0, null, "R")
                 .row(Q.Less_MoveRight7And0, null, Q.Less_MoveRight6And0, null, "R")
                 .row(Q.Less_MoveRight6And0, null, Q.Less_MoveRight5And0, null, "R")
@@ -169,16 +172,15 @@ public class FizzBuzzTransitions {
                 .row(Q.Less_Expect0, "1", Q.Halt, "C", null) // OK - higher bit was set in other
                 .row(Q.Less_Expect1, "0", Q.Halt, "C", null) // not OK
 
-                // > would work the same
-                //
-                ;
+        // > would work the same
+        ;
     }
 
     /**
      * Equal starts on left first digit of left argument and stops on the end of the first $.
      */
-    public TransitionTable equal() {
-        return new TransitionTable(CharSymbol::new) //
+    void equal(TransitionTable table) {
+        table //
                 .row(Q.Equal, "0", Q.Equal_MoveRight7And0, null, "R")
                 .row(Q.Equal_MoveRight7And0, null, Q.Equal_MoveRight6And0, null, "R")
                 .row(Q.Equal_MoveRight6And0, null, Q.Equal_MoveRight5And0, null, "R")
@@ -209,18 +211,15 @@ public class FizzBuzzTransitions {
 
                 .row(Q.Equal, "$", Q.Halt, "C", null) // all OK
                 .row(Q.Equal_Expect0, "1", Q.Halt, "C", null) // not OK
-                .row(Q.Equal_Expect1, "0", Q.Halt, "C", null) // not OK
-
-                //
-                ;
+                .row(Q.Equal_Expect1, "0", Q.Halt, "C", null); // not OK
     }
 
     /**
      * Inc starts on left first digit of argument and stops on the inc'ed $. <br />
      * The last digit must not overflow.
      */
-    public TransitionTable inc() {
-        return new TransitionTable(CharSymbol::new) //
+    void inc(TransitionTable table) {
+        table //
                 // 1. go to right $, then work backwards
                 .row(Q.Inc, null, Q.Inc_MoveRightAndInc, null, "R")
                 .row(Q.Inc_MoveRightAndInc, "0", Q.Inc_MoveRightAndInc, null, "R")
@@ -234,16 +233,15 @@ public class FizzBuzzTransitions {
                 .row(Q.Inc_DoneMoveRight, "1", Q.Inc_DoneMoveRight, null, "R")
                 .row(Q.Inc_DoneMoveRight, "$", Q.Halt, null, null)
 
-                // decrement would work the same
-                //
-                ;
+        // decrement would work the same
+        ;
     }
 
     /**
      * Duplicate starts on left first digit of argument and stops on the duplicated $.
      */
-    public TransitionTable duplicate() {
-        return new TransitionTable(CharSymbol::new) //
+    void duplicate(TransitionTable table) {
+        table //
                 // duplicate the 0 eight to the right
                 .row(Q.Dup, "0", Q.Dup_Move7RightAndWrite0, null, "R") // remember to write 0 and move right, need to move 7+1 right
                 .row(Q.Dup_Move7RightAndWrite0, null, Q.Dup_Move6RightAndWrite0, null, "R")
@@ -284,10 +282,7 @@ public class FizzBuzzTransitions {
                 .row(Q.Dup_Move4LeftAndStartAgain, null, Q.Dup_Move3LeftAndStartAgain, null, "L")
                 .row(Q.Dup_Move3LeftAndStartAgain, null, Q.Dup_Move2LeftAndStartAgain, null, "L")
                 .row(Q.Dup_Move2LeftAndStartAgain, null, Q.Dup_Move1LeftAndStartAgain, null, "L")
-                .row(Q.Dup_Move1LeftAndStartAgain, null, Q.Dup, null, "L")
-
-                //
-                ;
+                .row(Q.Dup_Move1LeftAndStartAgain, null, Q.Dup, null, "L");
     }
 }
 

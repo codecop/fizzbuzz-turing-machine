@@ -40,11 +40,6 @@ public class TransitionTable implements TransitionLookup {
         return this;
     }
 
-    public TransitionTable add(TransitionTable next) {
-        rows.addAll(next.rows);
-        return this;
-    }
-
     @Override
     public Transition next(State state, Symbol symbol) {
         Optional<TransitionTableRow> row = rows.stream().//
