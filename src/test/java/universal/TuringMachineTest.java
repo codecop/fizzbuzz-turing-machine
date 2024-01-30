@@ -22,18 +22,11 @@ class TuringMachineTest {
     }
 
     enum Q implements State {
-        ZERO(false), //
-        HALT(true);
-
-        private boolean terminal;
-
-        private Q(boolean terminal) {
-            this.terminal = terminal;
-        }
+        ZERO, HALT;
 
         @Override
         public boolean isTerminal() {
-            return this.terminal;
+            return this == HALT;
         }
     }
 
