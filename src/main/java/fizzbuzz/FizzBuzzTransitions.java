@@ -8,15 +8,15 @@ public class FizzBuzzTransitions {
 
     public TransitionTable create() {
         StringTransitionTable table = new StringTransitionTable(CharSymbol::new);
-        code(table);
-        less(table);
-        equal(table);
-        inc(table);
-        duplicate(table);
+        addCode(table);
+        addLess(table);
+        addEqual(table);
+        addInc(table);
+        addDuplicate(table);
         return table;
     }
 
-    void code(StringTransitionTable table) {
+    void addCode(StringTransitionTable table) {
         table //
                 .row(Q.Ip_Restart, "P", Q.Ip_SwitchRight, null, "R") // 
 
@@ -139,7 +139,7 @@ public class FizzBuzzTransitions {
     /**
      * Less starts on left first (highest) digit of left argument and stops on the end of the first $.
      */
-    void less(StringTransitionTable table) {
+    void addLess(StringTransitionTable table) {
         table //
                 .row(Q.Less, "0", Q.Less_MoveRight7And0, null, "R")
                 .row(Q.Less_MoveRight7And0, null, Q.Less_MoveRight6And0, null, "R")
@@ -180,7 +180,7 @@ public class FizzBuzzTransitions {
     /**
      * Equal starts on left first digit of left argument and stops on the end of the first $.
      */
-    void equal(StringTransitionTable table) {
+    void addEqual(StringTransitionTable table) {
         table //
                 .row(Q.Equal, "0", Q.Equal_MoveRight7And0, null, "R")
                 .row(Q.Equal_MoveRight7And0, null, Q.Equal_MoveRight6And0, null, "R")
@@ -219,7 +219,7 @@ public class FizzBuzzTransitions {
      * Inc starts on left first digit of argument and stops on the inc'ed $. <br />
      * The last digit must not overflow.
      */
-    void inc(StringTransitionTable table) {
+    void addInc(StringTransitionTable table) {
         table //
                 // 1. go to right $, then work backwards
                 .row(Q.Inc, null, Q.Inc_MoveRightAndInc, null, "R")
@@ -241,7 +241,7 @@ public class FizzBuzzTransitions {
     /**
      * Duplicate starts on left first digit of argument and stops on the duplicated $.
      */
-    void duplicate(StringTransitionTable table) {
+    void addDuplicate(StringTransitionTable table) {
         table //
                 // duplicate the 0 eight to the right
                 .row(Q.Dup, "0", Q.Dup_Move7RightAndWrite0, null, "R") // remember to write 0 and move right, need to move 7+1 right

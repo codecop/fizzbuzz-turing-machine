@@ -42,7 +42,7 @@ class FizzBuzzTest {
 
         @Test
         void duplicate() {
-            new FizzBuzzTransitions().duplicate(table);
+            new FizzBuzzTransitions().addDuplicate(table);
             createMachineWith("0000000$", Q.Dup, table);
             machine.loop();
             assertTapeEquals("0000000$0000000$");
@@ -50,7 +50,7 @@ class FizzBuzzTest {
 
         @Test
         void incZero() {
-            new FizzBuzzTransitions().inc(table);
+            new FizzBuzzTransitions().addInc(table);
             createMachineWith("0000000$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000001$");
@@ -58,7 +58,7 @@ class FizzBuzzTest {
 
         @Test
         void incOne() {
-            new FizzBuzzTransitions().inc(table);
+            new FizzBuzzTransitions().addInc(table);
             createMachineWith("0000001$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("0000010$");
@@ -66,7 +66,7 @@ class FizzBuzzTest {
 
         @Test
         void incToMax() {
-            new FizzBuzzTransitions().inc(table);
+            new FizzBuzzTransitions().addInc(table);
             createMachineWith("0111111$", Q.Inc, table);
             machine.loop();
             assertTapeEquals("1000000$");
@@ -74,7 +74,7 @@ class FizzBuzzTest {
 
         @Test
         void equal() {
-            new FizzBuzzTransitions().equal(table);
+            new FizzBuzzTransitions().addEqual(table);
             createMachineWith("0101101$0101101$", Q.Equal, table);
             machine.loop();
             assertTapeEquals("0101101C0101101$");
