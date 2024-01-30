@@ -11,28 +11,24 @@ public class Tape<SYM extends Symbol> {
 
     // Each cell of the tape holds a symbol.
     private final Map<Integer, SYM> cells = new TreeMap<>();
-    private final SYM defaultValue;
+    private final SYM defaultSymbol;
     // Define the head position.
-    private int head = 0;
-
-    Tape(List<SYM> input) {
-        this(input, null);
-    }
+    private int headPosition = 0;
 
     // Input: Provide the initial content of the tape and the starting state of the machine.
-    public Tape(List<SYM> input, SYM defaultValue) {
-        for (int i = 0; i < input.size(); i++) {
-            this.cells.put(i, input.get(i));
+    public Tape(List<SYM> symbols, SYM defaultValue) {
+        for (int i = 0; i < symbols.size(); i++) {
+            this.cells.put(i, symbols.get(i));
         }
-        this.defaultValue = defaultValue;
+        this.defaultSymbol = defaultValue;
     }
 
     public SYM read() {
-        return cells.getOrDefault(head, defaultValue);
+        return cells.getOrDefault(headPosition, defaultSymbol);
     }
 
     public void write(SYM symbol) {
-        cells.put(head, symbol);
+        cells.put(headPosition, symbol);
     }
 
     /**
@@ -41,19 +37,19 @@ public class Tape<SYM extends Symbol> {
     public void moveHead(Direction direction) {
         switch (direction) {
         case LEFT:
-            head--;
+            headPosition--;
             break;
         case NONE:
             break;
         case RIGHT:
-            head++;
+            headPosition++;
             break;
         default:
             throw new IllegalArgumentException(direction.name());
         }
     }
 
-    // for testing
+    // display whole tape for testing
 
     public List<SYM> getCells() {
         List<SYM> values = cells.values().stream().collect(Collectors.toList());
@@ -62,14 +58,10 @@ public class Tape<SYM extends Symbol> {
 
     @Override
     public String toString() {
-        String debug = "Tape: @" + head + " ";
-        if (cells.containsKey(head - 1)) {
-            debug += "[" + cells.get(head - 1) + "<]";
-        }
-        debug += "[" + cells.get(head) + "]";
-        if (cells.containsKey(head + 1)) {
-            debug += "[>" + cells.get(head + 1) + "]";
-        }
+        String debug = "Tape: @" + headPosition + " ";
+        debug += "[" + cells.get(headPosition - 1) + "<]";
+        debug += "[" + cells.get(headPosition) + "]";
+        debug += "[>" + cells.get(headPosition + 1) + "]";
         return debug;
     }
 }

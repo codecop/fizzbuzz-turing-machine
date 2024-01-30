@@ -42,13 +42,12 @@ class TuringMachineTest {
         Q initial = Q.Zero;
         List<Alphabet> _011010 = Arrays.asList(Alphabet.Zero, Alphabet.One, Alphabet.One, //
                 Alphabet.Zero, Alphabet.One, Alphabet.Zero, Alphabet.Blank);
-        Tape<Alphabet> tape = new Tape<>(_011010, null);
+        Tape<Alphabet> tape = new Tape<>(_011010, Alphabet.Blank);
 
-        TransitionLookup transitionLookup = new TransitionTable(). //
+        TransitionLookup transitionLookup = new TransitionTable(null). //
                 row(Q.Zero, Alphabet.Zero, null, Alphabet.One, Direction.RIGHT). //
                 row(Q.Zero, Alphabet.One, null, null, Direction.RIGHT). //
-                row(Q.Zero, Alphabet.Blank, Q.Halt, null, null). //
-                toRules();
+                row(Q.Zero, Alphabet.Blank, Q.Halt, null, null); 
 
         TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitionLookup, initial);
 

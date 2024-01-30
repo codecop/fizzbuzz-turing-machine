@@ -4,5 +4,5 @@ import universal.tape.Symbol;
 
 public interface TransitionLookup {
 
-    Transition next(State state, Symbol symbol);
+    Transition next(State currentState, Symbol symbolRead);
 }

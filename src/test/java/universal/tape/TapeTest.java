@@ -14,7 +14,7 @@ class TapeTest {
 
     @Test
     void readAndWrite() {
-        Tape<S> tape = new Tape<>(Arrays.asList(S.A));
+        Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         assertEquals(S.A, tape.read());
         tape.write(S.C);
@@ -23,7 +23,7 @@ class TapeTest {
 
     @Test
     void move() {
-        Tape<S> tape = new Tape<>(Arrays.asList(S.A, S.B, S.C));
+        Tape<S> tape = new Tape<>(Arrays.asList(S.A, S.B, S.C), null);
 
         tape.moveHead(Direction.RIGHT);
         assertEquals(S.B, tape.read());
@@ -52,7 +52,7 @@ class TapeTest {
 
     @Test
     void wroteBeyondEnd() {
-        Tape<S> tape = new Tape<>(Arrays.asList(S.A));
+        Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         tape.moveHead(Direction.RIGHT);
 
@@ -64,7 +64,7 @@ class TapeTest {
 
     @Test
     void wroteBelowBeginning() {
-        Tape<S> tape = new Tape<>(Arrays.asList(S.A));
+        Tape<S> tape = new Tape<>(Arrays.asList(S.A), null);
 
         tape.moveHead(Direction.LEFT);
 

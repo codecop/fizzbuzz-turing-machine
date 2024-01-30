@@ -1,29 +1,23 @@
 package universal.state;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import universal.tape.Direction;
 import universal.tape.Symbol;
 
 /**
- * Factory for TransitionRules using table rows.
+ * Container with builder for list of TransitionTableRows.
  */
-public class TransitionTable {
+public class TransitionTable implements TransitionLookup {
 
-    private final Function<String, Symbol> converter;
+    private final Function<String, Symbol> symbolConverter;
     private final List<TransitionTableRow> rows = new ArrayList<>();
 
-    public TransitionTable() {
-        this(s -> {
-            throw new IllegalArgumentException(s);
-        });
-    }
-
-    public TransitionTable(Function<String, Symbol> converter) {
-        this.converter = converter;
+    public TransitionTable(Function<String, Symbol> symbolConverter) {
+        this.symbolConverter = symbolConverter;
     }
 
     /**
@@ -31,9 +25,9 @@ public class TransitionTable {
      */
     public TransitionTable row(State state, String symbol, State newState, String newSymbol, String direction) {
         return row(state, //
-                isSymbol(symbol) ? converter.apply(symbol) : null, //
+                isSymbol(symbol) ? symbolConverter.apply(symbol) : null, //
                 newState, //
-                isSymbol(newSymbol) ? converter.apply(newSymbol) : null, //
+                isSymbol(newSymbol) ? symbolConverter.apply(newSymbol) : null, //
                 Direction.fromString(direction));
     }
 
@@ -46,7 +40,18 @@ public class TransitionTable {
         return this;
     }
 
-    public TransitionTableLookup toRules() {
-        return new TransitionTableLookup(Collections.unmodifiableList(rows));
+    public TransitionTable add(TransitionTable next) {
+        rows.addAll(next.rows);
+        return this;
     }
+
+    @Override
+    public Transition next(State state, Symbol symbol) {
+        Optional<TransitionTableRow> row = rows.stream().//
+                filter(r -> r.applies(state, symbol)). //
+                findFirst();
+        return row.map(r -> r.getTransition(state, symbol)) //
+                .orElse(null);
+    }
+
 }

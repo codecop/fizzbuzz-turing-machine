@@ -1,17 +1,15 @@
 package fizzbuzz;
 
 import universal.state.State;
-import universal.state.TransitionLookup;
 import universal.state.TransitionTable;
-import universal.state.TransitionTableLookup;
 
 public class FizzBuzzTransitions {
 
-    public TransitionLookup create() {
+    public TransitionTable create() {
         return code().add(less()).add(equal()).add(inc()).add(duplicate());
     }
 
-    public TransitionTableLookup code() {
+    public TransitionTable code() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Ip_Restart, "P", Q.Ip_SwitchRight, null, "R") // 
 
@@ -131,13 +129,13 @@ public class FizzBuzzTransitions {
                 .row(Q.Ip_Goto, "L", Q.Ip_Restart, null, "R") //
 
                 //
-                .toRules();
+                ;
     }
 
     /**
      * Less starts on left first (highest) digit of left argument and stops on the end of the first $.
      */
-    public TransitionTableLookup less() {
+    public TransitionTable less() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Less, "0", Q.Less_MoveRight7And0, null, "R")
                 .row(Q.Less_MoveRight7And0, null, Q.Less_MoveRight6And0, null, "R")
@@ -173,13 +171,13 @@ public class FizzBuzzTransitions {
 
                 // > would work the same
                 //
-                .toRules();
+                ;
     }
 
     /**
      * Equal starts on left first digit of left argument and stops on the end of the first $.
      */
-    public TransitionTableLookup equal() {
+    public TransitionTable equal() {
         return new TransitionTable(CharSymbol::new) //
                 .row(Q.Equal, "0", Q.Equal_MoveRight7And0, null, "R")
                 .row(Q.Equal_MoveRight7And0, null, Q.Equal_MoveRight6And0, null, "R")
@@ -214,14 +212,14 @@ public class FizzBuzzTransitions {
                 .row(Q.Equal_Expect1, "0", Q.Halt, "C", null) // not OK
 
                 //
-                .toRules();
+                ;
     }
 
     /**
      * Inc starts on left first digit of argument and stops on the inc'ed $. <br />
      * The last digit must not overflow.
      */
-    public TransitionTableLookup inc() {
+    public TransitionTable inc() {
         return new TransitionTable(CharSymbol::new) //
                 // 1. go to right $, then work backwards
                 .row(Q.Inc, null, Q.Inc_MoveRightAndInc, null, "R")
@@ -238,13 +236,13 @@ public class FizzBuzzTransitions {
 
                 // decrement would work the same
                 //
-                .toRules();
+                ;
     }
 
     /**
      * Duplicate starts on left first digit of argument and stops on the duplicated $.
      */
-    public TransitionTableLookup duplicate() {
+    public TransitionTable duplicate() {
         return new TransitionTable(CharSymbol::new) //
                 // duplicate the 0 eight to the right
                 .row(Q.Dup, "0", Q.Dup_Move7RightAndWrite0, null, "R") // remember to write 0 and move right, need to move 7+1 right
@@ -289,7 +287,7 @@ public class FizzBuzzTransitions {
                 .row(Q.Dup_Move1LeftAndStartAgain, null, Q.Dup, null, "L")
 
                 //
-                .toRules();
+                ;
     }
 }
 
