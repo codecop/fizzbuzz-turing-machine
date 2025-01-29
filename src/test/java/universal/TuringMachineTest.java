@@ -1,6 +1,9 @@
 package universal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static universal.TuringMachineTest.Alphabet.END_OF_TAPE;
+import static universal.TuringMachineTest.Alphabet._1;
+import static universal.TuringMachineTest.Alphabet._0;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,13 +19,11 @@ import universal.tape.Tape;
 class TuringMachineTest {
 
     enum Alphabet implements Symbol {
-        ZERO, //
-        ONE, //
-        END_OF_TAPE // 
+        _0, _1, END_OF_TAPE
     }
 
-    enum Q implements State {
-        ZERO, HALT;
+    enum S implements State {
+        RUNNING, HALT;
 
         @Override
         public boolean isTerminal() {
@@ -32,26 +33,20 @@ class TuringMachineTest {
 
     @Test
     void replaces0With1() {
-        Q initialState = Q.ZERO;
-        List<Alphabet> _011010 = Arrays.asList( //
-                Alphabet.ZERO, Alphabet.ONE, Alphabet.ONE, //
-                Alphabet.ZERO, Alphabet.ONE, Alphabet.ZERO, //
-                Alphabet.END_OF_TAPE);
-        Tape<Alphabet> tape = new Tape<>(_011010, Alphabet.END_OF_TAPE);
+        S initialState = S.RUNNING;
+        List<Alphabet> _011010 = Arrays.asList(_0, _1, _1, _0, _1, _0, END_OF_TAPE);
+        Tape<Alphabet> tape = new Tape<>(_011010, END_OF_TAPE);
 
         TransitionTable transitions = new TransitionTable(). //
-                row(Q.ZERO, Alphabet.ZERO, null, Alphabet.ONE, Direction.RIGHT). //
-                row(Q.ZERO, Alphabet.ONE, null, null, Direction.RIGHT). //
-                row(Q.ZERO, Alphabet.END_OF_TAPE, Q.HALT, null, Direction.NONE);
+                row(S.RUNNING, _0, null, _1, Direction.RIGHT). //
+                row(S.RUNNING, _1, null, null, Direction.RIGHT). //
+                row(S.RUNNING, END_OF_TAPE, S.HALT, null, Direction.NONE);
 
         TuringMachine<Alphabet> machine = new TuringMachine<>(tape, transitions, initialState);
 
         machine.loop();
 
-        List<Alphabet> expected_111111 = Arrays.asList( //
-                Alphabet.ONE, Alphabet.ONE, Alphabet.ONE, //
-                Alphabet.ONE, Alphabet.ONE, Alphabet.ONE, //
-                Alphabet.END_OF_TAPE);
+        List<Alphabet> expected_111111 = Arrays.asList(_1, _1, _1, _1, _1, _1, END_OF_TAPE);
         List<Alphabet> actualResult = tape.getCells();
         assertEquals(expected_111111, actualResult);
     }
