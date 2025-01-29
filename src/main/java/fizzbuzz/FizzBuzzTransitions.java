@@ -226,6 +226,7 @@ public class FizzBuzzTransitions {
                 .row(Q.Inc_MoveRightAndInc, "0", Q.Inc_MoveRightAndInc, null, "R")
                 .row(Q.Inc_MoveRightAndInc, "1", Q.Inc_MoveRightAndInc, null, "R")
                 .row(Q.Inc_MoveRightAndInc, "$", Q.Inc_IncToTheLeft, null, "L")
+
                 .row(Q.Inc_IncToTheLeft, "0", Q.Inc_DoneMoveRight, "1", null) // finished
                 .row(Q.Inc_IncToTheLeft, "1", Q.Inc_IncToTheLeft, "0", "L") // add and continue with overflow/carry
 
