@@ -1,0 +1,83 @@
+Checkin (5')
+* Emily: should do 10 things
+* Samuel: I am here, looking forward
+* Peter: hot, sunny
+* Johan: good
+
+---
+
+Topic: Turing Machine
+---------------------
+
+Intro and Inc 0 -> 1 (20')
+
+What's a TM?
+* a thought experiment
+* infinite tape
+* intruction tape?
+* move according to what's on the tape
+* it's a state machine
+
+Show
+* small TM to set all bits to 1.
+
+Idea: use approvals for test as there is a toString
+Idea: do not need the Symbol marker interface.
+Idea: Could use char instead as well.
+
+-
+
+FizzBuzz needs?
+
+* numbers?
+  7 bit
+
+* inc(number)
+  0001001101
+         <-1
+          10
+
+* Show raw Inc on bits
+
+Idea: Have the position of the bit as every second slot 
+  instead of marker at end of number.
+  instead of 0101011$
+  have       0a1b0c1d0e1f1g ... where g = bit 0, a = bit 7
+
+Define Input: Max number of what I want.
+
+Question: What is the end state when I do not have a display?
+
+---
+
+Infrastructure (20')
+
+* Show test "Pih" 
+* Show code for "Pih"
+* Show final code for loop 1 to 16
+
+---
+
+Comments
+
+I reinvented parts assembly. This is what I know. Am I biased?
+
+I implementing binary operations in TM, 
+  so I implemented a machine to implement Fizz Buzz
+
+Idea: I could create it with 100 symbols that just write 1,2,Fizz,4,Buzz, but
+  there is no challenge and boring.
+
+I never appreciated how high level assembly could be.
+
+Idea: Algorithm to write numbers and go every third and do something to field
+  Do the same with 5 and then we have it
+  So I do not have to deal with division.
+
+---
+
+Checkout
+* Emily: cool, thank you
+* Johan: very interesting, you build a machine on top of a machine to do Fizz Buzz
+* Samuel: way too curious, I got bitten ;-), the file is already open in my editor
+* Peter: got an idea how to present, good to hear about options
